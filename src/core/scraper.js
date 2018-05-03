@@ -1,9 +1,9 @@
 const fetch = require('node-fetch')
 
-const searchInURL = (url, filter) => {
+const scraper = (url, filter) => {
   return fetch(`${url}${filter}`)
     .then((result) => result.text())
-    .catch((err) => console.log(err))
+    .catch((err) => { throw err })
 }
 
-module.exports = searchInURL
+module.exports = scraper

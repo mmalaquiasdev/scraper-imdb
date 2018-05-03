@@ -1,14 +1,26 @@
-const { searchInURL } = require('./libs/index')
+const { scraper } = require('./core/index')
 const cheerio = require('cheerio')
 
-const url = 'https://www.imdb.com/find?s=tt&ref_=fn_al_tt_mr&q='
+const search = (url, filter) => {
+  scraper(url, filter)
+    .then((res) => {
+      const movies = []
+      const $ = cheerio.load(res)
+      $('.findResult').each((index, element) => {
+        const $primaryPhoto = $(element).find('td.primary_photo a img')
+        const $title = $(element).find('td.result_text a')
 
-searchInURL(url, 'star wars')
-  .then((res) => {
-    const $ = cheerio.load(res)
-    $('.findResult')
-      .each((index, element) => {
-        const $element = $(element)
-        console.log($element.text())
+        movies.push(createMovie($primaryPhoto, $title))
+        console.log(movies)
       })
-  })
+    })
+}
+
+const createMovie = ($image, $title) => {
+  return {
+    image: $image.attr('src'),
+    title: $title.text()
+  }
+}
+
+module.exports = search
