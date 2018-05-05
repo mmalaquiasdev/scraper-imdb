@@ -1,4 +1,4 @@
-const { scraper } = require('./core/index')
+const { scraper } = require('./core')
 const cheerio = require('cheerio')
 
 const search = (url, filter) => {
@@ -7,19 +7,16 @@ const search = (url, filter) => {
       const movies = []
       const $ = cheerio.load(res)
       $('.findResult').each((index, element) => {
-        const $primaryPhoto = $(element).find('td.primary_photo a img')
-        const $title = $(element).find('td.result_text a')
-
-        movies.push(createMovie($primaryPhoto, $title))
+        movies.push(createMovie($, element))
         console.log(movies)
       })
     })
 }
 
-const createMovie = ($image, $title) => {
+const createMovie = ($, element) => {
   return {
-    image: $image.attr('src'),
-    title: $title.text()
+    image: $(element).find('td.primary_photo a img').attr('src'),
+    title: $(element).find('td.result_text a').text()
   }
 }
 
