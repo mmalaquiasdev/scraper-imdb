@@ -1,9 +1,23 @@
-const fetch = require('node-fetch')
+const { fetchURL } = require('../libs')
+const cheerio = require('cheerio')
 
-const scraper = (url, filter) => {
-  return fetch(`${url}${filter}`)
-    .then((result) => result.text())
-    .catch((err) => { throw err })
+const search = (url, filter) => {
+  fetchURL(url, filter)
+    .then((res) => {
+      const movies = []
+      const $ = cheerio.load(res)
+      $('.findResult').each((index, element) => {
+        movies.push(createMovie($, element))
+        console.log(movies)
+      })
+    })
 }
 
-module.exports = scraper
+const createMovie = ($, element) => {
+  return {
+    image: $(element).find('td.primary_photo a img').attr('src'),
+    title: $(element).find('td.result_text a').text()
+  }
+}
+
+module.exports = search
