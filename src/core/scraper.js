@@ -1,7 +1,7 @@
 const { fetchURL } = require('../libs')
 const cheerio = require('cheerio')
 
-const search = (url, filter) => {
+const scraper = (url, filter) => {
   fetchURL(url, filter)
     .then((res) => {
       const movies = []
@@ -20,4 +20,4 @@ const createMovie = ($, element) => {
   }
 }
 
-module.exports = search
+module.exports = scraper

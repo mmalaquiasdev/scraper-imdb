@@ -1,3 +1,3 @@
 module.exports = {
-  scraper: require('./scraper.js')
+  scraper: require('./scraper')
 }
