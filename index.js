@@ -10,11 +10,10 @@ express.get('/', (req, res) => {
   })
 })
 
-const imdbSearchURL = 'https://www.imdb.com/find?s=tt&ref_=fn_al_tt_mr&q='
 const imdbMovieURL = 'https://www.imdb.com/title/'
 
 express.get('/search/:title', (req, res) => {
-  scraperSearchURL(imdbSearchURL, req.params.title)
+  scraperSearchURL(req.params.title)
     .then(data => res.json(data))
 })
 

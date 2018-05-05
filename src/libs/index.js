@@ -1,3 +1,3 @@
 module.exports = {
-  fetchURL: require('./fetch-url')
+  fetchURLToCheerioInstance: require('./fetch-url-cheerio-instance')
 }
