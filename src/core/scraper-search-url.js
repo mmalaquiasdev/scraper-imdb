@@ -2,7 +2,9 @@ const { fetchURLToCheerioInstance } = require('../libs')
 
 const url = 'https://www.imdb.com/find?s=tt&ref_=fn_al_tt_mr&q='
 
-const scraperSearchURL = (fetch, term) => fetchURLToCheerioInstance(fetch, `${url}${term}`).then(parseElementsToMovies)
+const scraperSearchURL = (fetch, term) => {
+  return fetchURLToCheerioInstance(fetch, `${url}${term}`).then(parseElementsToMovies)
+}
 
 const parseElementsToMovies = ($) => {
   const movies = []
