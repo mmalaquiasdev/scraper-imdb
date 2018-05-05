@@ -1,9 +1,6 @@
 const { fetchURL } = require('../libs')
-const scraperSearchURL = (url, filter) => {
-  return fetchURL(url, filter)
-    .then(($) => parseElementsToMovies($))
-    .catch((err) => { throw err })
-}
+
+const scraperSearchURL = (url, filter) => fetchURL(url, filter).then(parseElementsToMovies)
 
 const parseElementsToMovies = ($) => {
   const movies = []
