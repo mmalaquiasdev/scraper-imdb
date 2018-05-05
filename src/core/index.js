@@ -1,3 +1,3 @@
 module.exports = {
-  scraper: require('./scraper')
+  scraperSearchURL: require('./scraper-search-url')
 }

@@ -1,4 +1,4 @@
-const { scraper } = require('./src/core')
+const { scraperSearchURL } = require('./src/core')
 const express = require('express')()
 
 const port = process.env.PORT || 3000
@@ -10,4 +10,9 @@ express.get('/', (req, res) => {
   })
 })
 
-// scraper('https://www.imdb.com/find?s=tt&ref_=fn_al_tt_mr&q=', 'star wars')
+const imdbSearchURL = 'https://www.imdb.com/find?s=tt&ref_=fn_al_tt_mr&q='
+express.get('/search/:title', (req, res) => {
+  scraperSearchURL(imdbSearchURL, req.params.title)
+    .then(data => res.json(data))
+    .catch(err => console.error(err))
+})
