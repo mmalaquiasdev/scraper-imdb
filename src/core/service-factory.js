@@ -1,9 +1,8 @@
 const scraperSearchURL = require('./scraper-search-url')
-
-const serviceFactory = (fetch) => {
-  return {
-    scraperSearchURL: term => scraperSearchURL(fetch, term)
-  }
-}
+const scraperMovieURL = require('./scraper-movie-url')
+const serviceFactory = (fetch) => ({
+  scraperSearchURL: term => scraperSearchURL(fetch, term),
+  scraperMovieURL: imdbID => scraperMovieURL(fetch, imdbID)
+})
 
 module.exports = serviceFactory
