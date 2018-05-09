@@ -16,7 +16,9 @@ const parseElementsToMovie = $ => ({
   ratingValue: $('span[itemprop="ratingValue"]').text(),
   poster: $('div.poster a img').attr('src'),
   summary: $('div.summary_text').text().trim(),
-  directors: parseElementsToArray($, 'span[itemProp="director"]')
+  directors: parseElementsToArray($, 'span[itemProp="director"]'),
+  writers: parseElementsToArray($, '.credit_summary_item span[itemProp="creator"]'),
+  stars: parseElementsToArray($, '.credit_summary_item span[itemProp="actors"]')
 })
 
 const parseElementsToArray = ($, querySelector) => {
