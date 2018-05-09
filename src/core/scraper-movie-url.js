@@ -15,13 +15,14 @@ const parseElementsToMovie = $ => ({
   datePublished: $('meta[itemprop="datePublished"]').attr('content'),
   ratingValue: $('span[itemprop="ratingValue"]').text(),
   poster: $('div.poster a img').attr('src'),
-  summary: $('div.summary_text').text().trim()
+  summary: $('div.summary_text').text().trim(),
+  directors: parseElementsToArray($, 'span[itemProp="director"]')
 })
 
 const parseElementsToArray = ($, querySelector) => {
   const result = []
   $(querySelector).map((_, element) => {
-    result.push($(element).text())
+    result.push($(element).text().trim())
   })
   return result
 }
